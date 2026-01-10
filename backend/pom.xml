@@ -61,6 +61,20 @@
 					</excludes>
 				</configuration>
 			</plugin>
+            <!-- Spotless Plugin for Code Formatting -->
+            <plugin>
+                <groupId>com.diffplug.spotless</groupId>
+                <artifactId>spotless-maven-plugin</artifactId>
+                <version>2.43.0</version>
+                <configuration>
+                    <java>
+                        <googleJavaFormat>
+                            <version>1.17.0</version>
+                            <style>GOOGLE</style>
+                        </googleJavaFormat>
+                    </java>
+                </configuration>
+            </plugin>
             <!-- Checkstyle Plugin for Code Validation -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

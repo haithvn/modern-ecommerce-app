@@ -14,4 +14,10 @@ module.exports = {
       `npm run format --prefix frontend -- ${relativeFiles.join(' ')}`,
     ];
   },
+  'backend/src/**/*.java': () => {
+    return [
+      `cmd /c "cd backend && mvnw.cmd spotless:apply"`,
+      `cmd /c "cd backend && mvnw.cmd checkstyle:check"`,
+    ];
+  },
 };
