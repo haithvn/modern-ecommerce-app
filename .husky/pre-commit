@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-exit 0
+"C:/Program Files/nodejs/node.exe" "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js" exec lint-staged
