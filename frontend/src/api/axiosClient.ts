@@ -1,9 +1,9 @@
-import axios from 'axios';
+import axios from "axios";
 
 const axiosClient = axios.create({
-  baseURL: 'http://localhost:8080/api',
+  baseURL: "http://localhost:8080/api",
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
 });
 
@@ -12,9 +12,9 @@ axiosClient.interceptors.response.use(
   (response) => response,
   (error) => {
     // Handle global errors here
-    console.error('API Error:', error);
+    console.error("API Error:", error);
     return Promise.reject(error);
-  }
+  },
 );
 
 export default axiosClient;

@@ -1,32 +1,40 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+/* eslint-disable react-refresh/only-export-components */
+import React, { createContext, useContext, useState, ReactNode } from "react";
 
-type CurrencyType = 'USD' | 'VND';
+export type CurrencyType = "USD" | "VND";
 
 interface CurrencyContextProps {
   currency: CurrencyType;
   setCurrency: (c: CurrencyType) => void;
-  convertPrice: (price: number, baseCurrency: string) => string;
+  convertPrice: (price: number) => string;
 }
 
-const CurrencyContext = createContext<CurrencyContextProps | undefined>(undefined);
+const CurrencyContext = createContext<CurrencyContextProps | undefined>(
+  undefined,
+);
 
 const EXCHANGE_RATE = 24000; // 1 USD = 24,000 VND
 
 export const CurrencyProvider = ({ children }: { children: ReactNode }) => {
-  const [currency, setCurrency] = useState<CurrencyType>('USD');
+  const [currency, setCurrency] = useState<CurrencyType>("USD");
 
-  const convertPrice = (price: number, baseCurrency: string) => {
+  const convertPrice = (price: number) => {
     // Giả sử base price từ DB luôn là USD (như trong Seeder)
-    // Nếu baseCurrency khác, cần logic phức tạp hơn. Ở đây ta đơn giản hóa.
-    
+
     let finalPrice = price;
-    
-    if (currency === 'VND') {
-        finalPrice = price * EXCHANGE_RATE;
-        return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(finalPrice);
+
+    if (currency === "VND") {
+      finalPrice = price * EXCHANGE_RATE;
+      return new Intl.NumberFormat("vi-VN", {
+        style: "currency",
+        currency: "VND",
+      }).format(finalPrice);
     }
 
-    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(finalPrice);
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    }).format(finalPrice);
   };
 
   return (
@@ -39,7 +47,7 @@ export const CurrencyProvider = ({ children }: { children: ReactNode }) => {
 export const useCurrency = () => {
   const context = useContext(CurrencyContext);
   if (!context) {
-    throw new Error('useCurrency must be used within a CurrencyProvider');
+    throw new Error("useCurrency must be used within a CurrencyProvider");
   }
   return context;
 };

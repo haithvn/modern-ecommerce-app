@@ -1,8 +1,8 @@
-import { Container } from 'react-bootstrap';
-import Header from './components/Header';
-import ProductList from './components/ProductList';
-import { CurrencyProvider } from './context/CurrencyContext';
-import './i18n'; // Init i18n
+import { Container } from "react-bootstrap";
+import Header from "./components/Header";
+import ProductList from "./components/ProductList";
+import { CurrencyProvider } from "./context/CurrencyContext";
+import "./i18n"; // Init i18n
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
         </Container>
       </div>
     </CurrencyProvider>
-  )
+  );
 }
 
-export default App
+export default App;

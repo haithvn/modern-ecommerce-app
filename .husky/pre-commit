@@ -1,2 +1,20 @@
 #!/usr/bin/env sh
-"C:/Program Files/nodejs/node.exe" "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js" exec lint-staged
+. "$(dirname -- "$0")/_/husky.sh"
+
+# --- Add Node.js to PATH for Git hooks on Windows ---
+# Nếu Node nằm ở đường khác, sửa lại cho đúng
+if command -v cygpath >/dev/null 2>&1; then
+  # Git Bash path style
+  export PATH="/c/Program Files/nodejs:$PATH"
+fi
+# ----------------------------------------------------
+
+REQ="v22"
+CUR="$(node -v)"
+case "$CUR" in
+  $REQ*) ;; # ok
+  *) echo "❌ Requires Node $REQ.x (current $CUR)"; exit 1;;
+esac
+
+echo "Running tests before commit…"
+npx lint-staged
