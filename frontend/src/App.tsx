@@ -5,6 +5,7 @@ import { CurrencyProvider } from './context/CurrencyContext';
 import './i18n'; // Init i18n
 
 function App() {
+  const unusedVar = "I am an error"; // ESLint should catch this
   return (
     <CurrencyProvider>
       <div className="min-vh-100 bg-light">
