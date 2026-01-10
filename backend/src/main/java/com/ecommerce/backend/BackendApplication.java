@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @EnableJpaAuditing // Kích hoạt tính năng tự động cập nhật createdDate/updatedDate
 public class BackendApplication {
 
+  public int BadName = 1;
+
   public static void main(String[] args) {
     SpringApplication.run(BackendApplication.class, args);
   }
