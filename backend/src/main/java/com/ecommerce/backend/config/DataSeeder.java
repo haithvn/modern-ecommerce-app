@@ -42,7 +42,7 @@ public class DataSeeder implements CommandLineRunner {
       p1.setPrice(new BigDecimal("1599.00"));
       p1.setCurrency("USD");
       p1.setCategory(laptops);
-      p1.setImageUrl("https://via.placeholder.com/150");
+      p1.setImageUrl("https://placehold.co/150");
 
       Product p2 = new Product();
       p2.setName("Dell XPS 13");
@@ -50,7 +50,7 @@ public class DataSeeder implements CommandLineRunner {
       p2.setPrice(new BigDecimal("1299.00"));
       p2.setCurrency("USD");
       p2.setCategory(laptops);
-      p2.setImageUrl("https://via.placeholder.com/150");
+      p2.setImageUrl("https://placehold.co/150");
 
       productRepository.saveAll(Arrays.asList(p1, p2));
 
