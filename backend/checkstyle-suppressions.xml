@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!DOCTYPE suppressions PUBLIC
+    "-//Checkstyle//DTD SuppressionFilter Configuration 1.2//EN"
+    "https://checkstyle.org/dtds/suppressions_1_2.dtd">
+<suppressions>
+    <!-- Bỏ qua các rule liên quan đến Javadoc -->
+    <suppress checks=".*Javadoc.*" files=".*"/>
+    <!-- Tạm thời bỏ qua rule đặt tên viết tắt (DTO) và import * cho code cũ -->
+    <suppress checks="AbbreviationAsWordInName" files=".*"/>
+    <suppress checks="AvoidStarImport" files=".*"/>
+</suppressions>
