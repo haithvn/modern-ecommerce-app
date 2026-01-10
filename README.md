@@ -14,8 +14,8 @@ Dự án được tổ chức theo mô hình **Monorepo** Client-Server:
 
 ```mermaid
 graph TD
-    Client[Frontend (React + Vite)] <-->|REST API / JSON| Server[Backend (Spring Boot)]
-    Server <-->|JPA / Hibernate| DB[(H2 Database)]
+    Client["Frontend (React + Vite)"] <-->|REST API / JSON| Server["Backend (Spring Boot)"]
+    Server <-->|JPA / Hibernate| DB[("H2 Database")]
 ```
 
 ### 🔙 Backend (`/backend`)
