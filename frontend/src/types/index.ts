@@ -8,3 +8,11 @@ export interface Product {
   categoryId: number;
   categoryName: string;
 }
+
+export interface RegisterRequest {
+  email: string;
+  password: string;
+  confirmPassword?: string;
+  firstName?: string;
+  lastName?: string;
+}
