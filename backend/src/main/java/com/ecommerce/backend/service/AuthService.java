@@ -33,6 +33,13 @@ public class AuthService {
   }
 
   public void verify(String code) {
-    // TODO: implement
+    User user =
+        userRepository
+            .findByVerificationCode(code)
+            .orElseThrow(() -> new RuntimeException("Invalid verification code"));
+
+    user.setActive(true);
+    user.setVerificationCode(null);
+    userRepository.save(user);
   }
 }
