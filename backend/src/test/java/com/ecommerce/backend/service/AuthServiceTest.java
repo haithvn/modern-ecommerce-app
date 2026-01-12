@@ -61,4 +61,33 @@ class AuthServiceTest {
     assertThrows(RuntimeException.class, () -> authService.register(registerRequest));
     verify(userRepository, never()).save(any());
   }
+
+  @Test
+  void verify_ShouldActivateUser_WhenCodeIsValid() {
+    // Arrange
+    String code = "validCode";
+    User user = new User();
+    user.setVerificationCode(code);
+    user.setActive(false);
+
+    when(userRepository.findByVerificationCode(code)).thenReturn(Optional.of(user));
+
+    // Act
+    authService.verify(code);
+
+    // Assert
+    assertTrue(user.isActive());
+    assertNull(user.getVerificationCode());
+    verify(userRepository, times(1)).save(user);
+  }
+
+  @Test
+  void verify_ShouldThrowException_WhenCodeIsInvalid() {
+    // Arrange
+    String code = "invalidCode";
+    when(userRepository.findByVerificationCode(code)).thenReturn(Optional.empty());
+
+    // Act & Assert
+    assertThrows(RuntimeException.class, () -> authService.verify(code));
+  }
 }

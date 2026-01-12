@@ -17,7 +17,12 @@ public class SecurityConfig {
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http.csrf(AbstractHttpConfigurer::disable)
         .authorizeHttpRequests(
-            auth -> auth.requestMatchers("/api/auth/**").permitAll().anyRequest().authenticated());
+            auth ->
+                auth.requestMatchers("/api/auth/**", "/h2-console/**")
+                    .permitAll()
+                    .anyRequest()
+                    .authenticated())
+        .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin()));
     return http.build();
   }
 

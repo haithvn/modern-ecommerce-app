@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -19,5 +20,11 @@ public class AuthController {
   public ResponseEntity<String> register(@RequestBody RegisterRequest request) {
     authService.register(request);
     return ResponseEntity.ok("User registered successfully. Please check your email to verify.");
+  }
+
+  @PostMapping("/verify")
+  public ResponseEntity<String> verify(@RequestParam String code) {
+    authService.verify(code);
+    return ResponseEntity.ok("Account verified successfully.");
   }
 }
