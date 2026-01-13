@@ -1,3 +1,6 @@
+# Local data
+.data/
+
 # IntelliJ IDEA
 .idea/
 *.iml

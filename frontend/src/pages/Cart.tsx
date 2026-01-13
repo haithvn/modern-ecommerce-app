@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Container, Table, Button, Row, Col, Card } from "react-bootstrap";
-import { getCart, removeFromCart, updateCartQuantity } from "../api/cartApi";
-import { CartDTO } from "../types";
+import { useCart } from "../context/CartContext";
 import { useTranslation } from "react-i18next";
 import { useCurrency } from "../context/CurrencyContext";
 import { Link } from "react-router-dom";
@@ -9,40 +8,18 @@ import { Link } from "react-router-dom";
 const Cart: React.FC = () => {
   const { t } = useTranslation();
   const { convertPrice } = useCurrency();
-  const [cart, setCart] = useState<CartDTO | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  const fetchCart = async () => {
-    try {
-      const data = await getCart();
-      setCart(data);
-    } catch (error) {
-      console.error("Failed to fetch cart", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchCart();
-  }, []);
+  const {
+    cart,
+    loading,
+    removeFromCart,
+    updateCartQuantity: handleQuantityChange,
+  } = useCart();
 
   const handleRemove = async (itemId: number) => {
     try {
       await removeFromCart(itemId);
-      fetchCart();
     } catch (error) {
       console.error("Failed to remove item", error);
-    }
-  };
-
-  const handleQuantityChange = async (itemId: number, newQuantity: number) => {
-    if (newQuantity < 1) return;
-    try {
-      await updateCartQuantity(itemId, newQuantity);
-      fetchCart();
-    } catch (error) {
-      console.error("Failed to update quantity", error);
     }
   };
 
