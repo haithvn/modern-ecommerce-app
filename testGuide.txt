@@ -1,0 +1,77 @@
+ Dưới đây là hướng dẫn chi tiết:
+
+  Bước 1: Khởi động hệ thống
+
+  Đảm bảo cả Backend và Frontend đều đang chạy.
+
+   1. Backend (Spring Boot):
+       * Mở terminal tại thư mục gốc hoặc backend.
+       * Chạy lệnh: backend/mvnw spring-boot:run (hoặc chạy qua IDE).
+       * Server sẽ chạy tại: http://localhost:8080.
+
+   2. Frontend (React):
+       * Mở một terminal khác tại thư mục frontend.
+       * Chạy lệnh: npm run dev.
+       * Truy cập trình duyệt tại: http://localhost:3000.
+
+  ---
+
+  Bước 2: Kịch bản kiểm thử thủ công (Manual Test)
+
+  Bạn hãy đóng vai người dùng và thực hiện các bước sau:
+
+  1. Đăng nhập (Bắt buộc)
+   * Vì giỏ hàng gắn liền với người dùng, bạn cần đăng nhập trước.
+   * Vào trang Login, nhập email/password (ví dụ tài khoản đã tạo ở các bước trước).
+   * Kết quả mong đợi: Đăng nhập thành công, chuyển hướng về trang chủ hoặc danh sách sản phẩm.
+
+  2. Thêm sản phẩm vào giỏ (Add to Cart)
+   * Tại trang danh sách sản phẩm (Home/Product List), nhấn nút "Add to Cart" trên một sản phẩm bất kỳ.
+   * Kết quả mong đợi:
+       * Số lượng hiển thị trên biểu tượng Giỏ hàng (trên Header) tăng lên 1.
+       * Không có lỗi console (nhấn F12 để kiểm tra).
+
+  3. Xem chi tiết giỏ hàng
+   * Nhấn vào biểu tượng Giỏ hàng trên Header.
+   * Kết quả mong đợi:
+       * Chuyển đến trang /cart.
+       * Hiển thị đúng sản phẩm vừa thêm.
+       * Tổng tiền (Total Price) được tính đúng.
+
+  4. Cập nhật số lượng (Update Quantity)
+   * Thay đổi số lượng sản phẩm (ví dụ: từ 1 lên 2).
+   * Kết quả mong đợi:
+       * Giá tổng của sản phẩm đó tăng lên.
+       * Tổng tiền (Grand Total) của cả giỏ hàng cập nhật theo.
+
+  5. Xóa sản phẩm (Remove Item)
+   * Nhấn nút "Remove" hoặc biểu tượng thùng rác bên cạnh sản phẩm.
+   * Kết quả mong đợi:
+       * Sản phẩm biến mất khỏi danh sách.
+       * Tổng tiền cập nhật lại.
+       * Số lượng trên Header giảm đi.
+
+  6. Kiểm tra tính lưu trữ (Persistence)
+   * Refresh (F5) lại trang web.
+   * Kết quả mong đợi: Giỏ hàng vẫn giữ nguyên trạng thái (do Backend lưu vào H2 database file).
+   * Đăng xuất (Logout) và đăng nhập lại. Giỏ hàng cũ vẫn phải còn đó.
+
+  ---
+
+
+  Vì bạn phát triển theo hướng TDD, hãy đảm bảo tất cả các test case đã viết đều pass.
+
+  1. Backend Tests:
+  Chạy lệnh sau tại thư mục gốc:
+
+   1 ./backend/mvnw test -f backend/pom.xml
+   * Kết quả mong đợi: BUILD SUCCESS. Các test CartServiceTest, CartControllerTest (nếu có) đều pass.
+
+  2. Frontend Tests:
+  Chạy lệnh sau tại thư mục gốc (hoặc trong frontend):
+   1 npm test --prefix frontend
+   * Kết quả mong đợi: Các test liên quan đến CartContext, Cart page hoặc components pass.
+
+  ---
+
+  Bước 4: Bước tiếp theo (Nếu Test OK)
