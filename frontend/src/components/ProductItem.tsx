@@ -2,6 +2,9 @@ import { Card, Button, Badge } from "react-bootstrap";
 import { Product } from "../types";
 import { useCurrency } from "../context/CurrencyContext";
 import { useTranslation } from "react-i18next";
+import { addToCart } from "../api/cartApi";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 interface Props {
   product: Product;
@@ -10,6 +13,27 @@ interface Props {
 const ProductItem = ({ product }: Props) => {
   const { convertPrice } = useCurrency();
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
+  const handleAddToCart = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      await addToCart(product.id, 1);
+      alert(t("added_to_cart", "Added to cart!"));
+    } catch (error) {
+      console.error("Failed to add to cart", error);
+      alert(t("add_to_cart_failed", "Failed to add to cart"));
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <Card className="h-100 shadow-sm">
@@ -28,8 +52,13 @@ const ProductItem = ({ product }: Props) => {
         </Card.Text>
         <div className="mt-auto">
           <h5 className="text-primary mb-3">{convertPrice(product.price)}</h5>
-          <Button variant="primary" className="w-100">
-            {t("buy")}
+          <Button
+            variant="primary"
+            className="w-100"
+            onClick={handleAddToCart}
+            disabled={loading}
+          >
+            {loading ? t("adding", "Adding...") : t("buy", "Add to Cart")}
           </Button>
         </div>
       </Card.Body>

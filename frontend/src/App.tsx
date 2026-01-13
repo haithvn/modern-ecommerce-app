@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import ProductList from "./components/ProductList";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import Cart from "./pages/Cart";
 import VerifyAccount from "./pages/VerifyAccount";
 import { CurrencyProvider } from "./context/CurrencyContext";
 import "./i18n"; // Init i18n
@@ -19,6 +20,7 @@ function App() {
               <Route path="/" element={<ProductList />} />
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/cart" element={<Cart />} />
               <Route path="/verify" element={<VerifyAccount />} />
               {/* Fallback route or login route can be added later */}
             </Routes>
