@@ -1,5 +1,5 @@
 import axiosClient from "./axiosClient";
-import { RegisterRequest } from "../types";
+import { RegisterRequest, LoginRequest, LoginResponse } from "../types";
 
 export const register = async (data: RegisterRequest) => {
   const response = await axiosClient.post("/auth/register", data);
@@ -8,5 +8,10 @@ export const register = async (data: RegisterRequest) => {
 
 export const verify = async (code: string) => {
   const response = await axiosClient.post(`/auth/verify?code=${code}`);
+  return response.data;
+};
+
+export const login = async (data: LoginRequest): Promise<LoginResponse> => {
+  const response = await axiosClient.post("/auth/login", data);
   return response.data;
 };

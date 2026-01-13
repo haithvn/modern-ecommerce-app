@@ -13,6 +13,16 @@ export interface RegisterRequest {
   email: string;
   password: string;
   confirmPassword?: string;
-  firstName?: string;
-  lastName?: string;
+  address?: string;
+  birthDate?: string;
+}
+
+export interface LoginRequest {
+  email: string;
+  password: string;
+}
+
+export interface LoginResponse {
+  token: string;
+  email: string;
 }

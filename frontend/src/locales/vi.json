@@ -1,8 +1,16 @@
 {
   "title": "Cửa Hàng Điện Tử",
+  "home": "Trang chủ",
   "loading": "Đang tải sản phẩm...",
   "price": "Giá",
   "currency": "Tiền tệ",
   "language": "Ngôn ngữ",
-  "buy": "Mua Ngay"
+  "buy": "Mua Ngay",
+  "login": "Đăng nhập",
+  "logout": "Đăng xuất",
+  "register": "Đăng ký",
+  "email": "Địa chỉ Email",
+  "password": "Mật khẩu",
+  "logging_in": "Đang đăng nhập...",
+  "dont_have_account": "Chưa có tài khoản?"
 }
