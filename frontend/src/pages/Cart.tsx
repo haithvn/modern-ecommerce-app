@@ -123,9 +123,9 @@ const Cart: React.FC = () => {
                   {convertPrice(cart.totalAmount)}
                 </h4>
               </div>
-              <Button variant="success" className="w-100" size="lg">
+              <Link to="/checkout" className="btn btn-success w-100 btn-lg">
                 {t("checkout")}
-              </Button>
+              </Link>
             </Card.Body>
           </Card>
         </Col>

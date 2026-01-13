@@ -10,6 +10,9 @@ import { CurrencyProvider } from "./context/CurrencyContext";
 import { CartProvider } from "./context/CartContext";
 import "./i18n"; // Init i18n
 
+import Checkout from "./pages/Checkout";
+import OrderSuccess from "./pages/OrderSuccess";
+
 function App() {
   return (
     <CurrencyProvider>
@@ -24,7 +27,8 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/verify" element={<VerifyAccount />} />
-                {/* Fallback route or login route can be added later */}
+                <Route path="/checkout" element={<Checkout />} />
+                <Route path="/order-success" element={<OrderSuccess />} />
               </Routes>
             </Container>
           </div>

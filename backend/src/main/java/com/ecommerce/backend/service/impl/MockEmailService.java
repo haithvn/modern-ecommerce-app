@@ -14,4 +14,11 @@ public class MockEmailService implements EmailService {
     System.out.println("VERIFICATION CODE: " + code);
     System.out.println("VERIFICATION LINK: http://localhost:8080/api/auth/verify?code=" + code);
   }
+
+  @Override
+  public void sendOrderConfirmation(String to, Long orderId) {
+    log.info("Sending order confirmation email to {}", to);
+    System.out.println("MOCK ORDER CONFIRMATION TO: " + to);
+    System.out.println("ORDER ID: " + orderId);
+  }
 }

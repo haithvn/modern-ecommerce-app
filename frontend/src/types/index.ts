@@ -42,3 +42,16 @@ export interface CartDTO {
   totalAmount: number;
   currency: string;
 }
+
+export interface OrderRequest {
+  shippingName: string;
+  shippingPhone: string;
+  shippingAddress: string;
+  paymentMethod: string;
+}
+
+export interface OrderResponse {
+  id: number;
+  status: string;
+  totalAmount: number;
+}
