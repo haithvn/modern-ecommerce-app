@@ -1,11 +1,13 @@
-import { Navbar, Container, Nav, Form, Button } from "react-bootstrap";
+import { Navbar, Container, Nav, Form, Button, Badge } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useCurrency, CurrencyType } from "../context/CurrencyContext";
 import { Link, useNavigate } from "react-router-dom";
+import { useCart } from "../context/CartContext";
 
 const Header = () => {
   const { t, i18n } = useTranslation();
   const { currency, setCurrency } = useCurrency();
+  const { itemCount } = useCart();
   const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
@@ -61,6 +63,11 @@ const Header = () => {
 
                 <Nav.Link as={Link} to="/cart">
                   {t("cart")}
+                  {itemCount > 0 && (
+                    <Badge pill bg="primary" className="ms-1">
+                      {itemCount}
+                    </Badge>
+                  )}
                 </Nav.Link>
 
                 <Button

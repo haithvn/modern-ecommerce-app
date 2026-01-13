@@ -2,7 +2,7 @@ import { Card, Button, Badge } from "react-bootstrap";
 import { Product } from "../types";
 import { useCurrency } from "../context/CurrencyContext";
 import { useTranslation } from "react-i18next";
-import { addToCart } from "../api/cartApi";
+import { useCart } from "../context/CartContext";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -13,6 +13,7 @@ interface Props {
 const ProductItem = ({ product }: Props) => {
   const { convertPrice } = useCurrency();
   const { t } = useTranslation();
+  const { addToCart: addCartItem } = useCart();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -25,7 +26,7 @@ const ProductItem = ({ product }: Props) => {
 
     setLoading(true);
     try {
-      await addToCart(product.id, 1);
+      await addCartItem(product.id, 1);
       alert(t("added_to_cart", "Added to cart!"));
     } catch (error) {
       console.error("Failed to add to cart", error);
