@@ -1,5 +1,7 @@
 package com.ecommerce.backend.controller;
 
+import com.ecommerce.backend.dto.LoginRequest;
+import com.ecommerce.backend.dto.LoginResponse;
 import com.ecommerce.backend.dto.RegisterRequest;
 import com.ecommerce.backend.service.AuthService;
 import lombok.RequiredArgsConstructor;
@@ -26,5 +28,10 @@ public class AuthController {
   public ResponseEntity<String> verify(@RequestParam String code) {
     authService.verify(code);
     return ResponseEntity.ok("Account verified successfully.");
+  }
+
+  @PostMapping("/login")
+  public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
+    return ResponseEntity.ok(authService.login(request));
   }
 }

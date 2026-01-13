@@ -1,5 +1,8 @@
 package com.ecommerce.backend.service;
 
+import com.ecommerce.backend.config.security.JwtUtil;
+import com.ecommerce.backend.dto.LoginRequest;
+import com.ecommerce.backend.dto.LoginResponse;
 import com.ecommerce.backend.dto.RegisterRequest;
 import com.ecommerce.backend.entity.User;
 import com.ecommerce.backend.repository.UserRepository;
@@ -13,6 +16,7 @@ public class AuthService {
   private final UserRepository userRepository;
   private final PasswordEncoder passwordEncoder;
   private final EmailService emailService;
+  private final JwtUtil jwtUtil;
 
   public void register(RegisterRequest request) {
     if (userRepository.findByEmail(request.getEmail()).isPresent()) {
@@ -41,5 +45,23 @@ public class AuthService {
     user.setActive(true);
     user.setVerificationCode(null);
     userRepository.save(user);
+  }
+
+  public LoginResponse login(LoginRequest request) {
+    User user =
+        userRepository
+            .findByEmail(request.getEmail())
+            .orElseThrow(() -> new RuntimeException("Invalid email or password"));
+
+    if (!user.isActive()) {
+      throw new RuntimeException("Account is not verified");
+    }
+
+    if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+      throw new RuntimeException("Invalid email or password");
+    }
+
+    String token = jwtUtil.generateToken(user.getEmail());
+    return LoginResponse.builder().token(token).email(user.getEmail()).build();
   }
 }
