@@ -26,3 +26,19 @@ export interface LoginResponse {
   token: string;
   email: string;
 }
+
+export interface CartItemDTO {
+  id: number;
+  productId: number;
+  productName: string;
+  productImageUrl: string;
+  unitPrice: number;
+  quantity: number;
+  subTotal: number;
+}
+
+export interface CartDTO {
+  items: CartItemDTO[];
+  totalAmount: number;
+  currency: string;
+}

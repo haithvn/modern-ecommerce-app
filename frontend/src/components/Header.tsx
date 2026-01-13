@@ -58,6 +58,11 @@ const Header = () => {
             {token ? (
               <>
                 <span className="text-light">{userEmail}</span>
+
+                <Nav.Link as={Link} to="/cart">
+                  {t("cart")}
+                </Nav.Link>
+
                 <Button
                   variant="outline-light"
                   size="sm"
